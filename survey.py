@@ -155,7 +155,7 @@ if __name__ == "__main__":
     survey_question_categories = sorted(list(survey_questions.keys()))
 
     # Query if dry running
-    dry_run = input("Do you want to do a dry run? (Y,n): ").lower() != "n"
+    dry_run = input("Do you want to do a dry run? (y,N): ").lower() == "y"
 
     # Query OpenAI API config from user
     llm_config = {}
@@ -206,7 +206,7 @@ if __name__ == "__main__":
 
         question_id = 1
 
-        # 🔹 Query the LLM for each survey question
+        # Query the LLM for each survey question
         for category in survey_question_categories:
             for question in survey_questions[category]:
                 full_prompt = f"{scenario_text}\n\n{question}"
@@ -230,9 +230,10 @@ if __name__ == "__main__":
                     "Response": llm_response
                 })
 
-                # Avoid hitting API rate limits
-                if not dry_run:
-                    time.sleep(1)
+            # Avoid hitting API rate limits
+            if not dry_run:
+                # time.sleep(1)
+                pass # Deactivate
 
     # Convert the list of rows to a DataFrame
     df = pd.DataFrame(rows, columns=["TrialId", "Scenario", "Category", "Question", "Response"])
