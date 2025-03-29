@@ -1,3 +1,8 @@
+00 Demographics: Please choose your gender. a)Male b)Female
+00 Demographics: Please enter your age.
+00 Demographics: Education. Please choose one. a)Some school but no degree  b)High school graduate  c)Some college but no degree  d)Bachelor’s degree e)Master’s degree f)Professional degree  g)Doctorate  h)Other
+00 Demographics: Employment status. Please choose one. a)Employed full-time  b)Employed part-time  c)Self-employed  d)Homemaker  e)Student  f)Retired  g)Unemployed  h)Other
+00 Demographics: Annual gross household income. Please choose one. a)Less than $20,000  b)$20,000 to $34,999  c)$35,000 to $49,999  d)$50,000 to $74,999  e)$75,000 to $99,999  f)$100,000 or more
 01 Distributive Price Fairness Perception: The price I paid was… (1 = Extremely Unfair, 7 = Extremely Fair)
 01 Distributive Price Fairness Perception: The price I paid was… (1 = Extremely Unacceptable, 7 = Extremely Acceptable)
 01 Distributive Price Fairness Perception: The price I paid was… (1 = Extremely Unreasonable, 7 = Extremely Reasonable)
@@ -21,8 +26,3 @@
 15 Manipulation Check Price Direction: What is the price you paid for your new smartphone? Choose one of the answers below. a)$80 b)$100 c)$120
 17 Realism Check: The scenario presented is easy to understand. (1 = Strongly Disagree, 7 = Strongly Agree)
 17 Realism Check: The scenario presented seems realistic to me, regardless of the prices stated. (1 = Strongly Disagree, 7 = Strongly Agree)
-18 Demographics: Please choose your gender. a)Male b)Female
-18 Demographics: Please enter your age.
-18 Demographics: Education. Please choose one. a)Some school but no degree  b)High school graduate  c)Some college but no degree  d)Bachelor’s degree e)Master’s degree f)Professional degree  g)Doctorate  h)Other
-18 Demographics: Employment status. Please choose one. a)Employed full-time  b)Employed part-time  c)Self-employed  d)Homemaker  e)Student  f)Retired  g)Unemployed  h)Other
-18 Demographics: Annual gross household income. Please choose one. a)Less than $20,000  b)$20,000 to $34,999  c)$35,000 to $49,999  d)$50,000 to $74,999  e)$75,000 to $99,999  f)$100,000 or more
