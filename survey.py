@@ -2,7 +2,7 @@
 
 import openai
 import random
-import time
+import json
 import os
 import pandas as pd
 import math
@@ -75,7 +75,6 @@ def read_dictionary_from_file(file_name):
     return dictionary
 
 
-
 # A LLM session keeping track of the state of the conversation
 class LLMSession:
 
@@ -116,6 +115,24 @@ class LLMSession:
         self.messages.append({"role": "user", "content": message})
 
 
+# A debug session for testing the conversation
+class DebugSession:
+
+    prefix = "DEBUG_SESSION - "
+
+    def __init__(self, pre_prompt):
+        print(f"{DebugSession.prefix}Running new debug session")
+        print(f"{DebugSession.prefix}* System: {pre_prompt}")
+        pass
+
+    def query(self, prompt):
+        print(f"{DebugSession.prefix}* User: {prompt}")
+        print(f"{DebugSession.prefix}* Assistant: [DRY_RUN]")
+        return "[DRY_RUN]"
+    
+    def add_user_message(self, message):
+        print(f"{DebugSession.prefix}* User: {message}")
+
 
 
 def find_sample_size(effect_size, alpha, power, num_groups):
@@ -149,16 +166,10 @@ if __name__ == "__main__":
 
     # Read general instruction pre-prompt for LLM
     if is_causal_inference:
-        pre_prompt = read_text_from_file(f"{directory}/prompt_causal_inference.txt")
-        
-        # Read CSV with causal inference data
-        causal_inference_data = pd.read_csv(f"{directory}/causal_inference_data.csv")
+        pre_prompt_template = read_text_from_file(f"{directory}/prompt_causal_inference.txt")
 
-        # Inject causal inference data into the pre-prompt
-        pre_prompt = pre_prompt.format(
-            # TODO: Add causal inference data to the pre-prompt
-        )
-
+        # Load causal inference data
+        causal_inference_data = pd.read_csv("causal_inference_consumer_data.csv")
     else:
         pre_prompt = read_text_from_file(f"{directory}/prompt.txt")
 
@@ -194,14 +205,22 @@ if __name__ == "__main__":
             llm_config["model"] = model
         
 
-    # Query output file name from user
-    output_file = input("Enter the name of the output file: ")
-
     # Query the number of trials from the user
     num_trials = int(input("Enter the number of trials: "))
                      
     # Ask if the user wants to do a "within-subject" or "between-subject" survey
     within_subject = input("Do you want to do a within-subject survey? (y/N): ").lower() == "y"
+
+    # Query output file name from user
+    output_file = input("Enter the name of the output csv file (e.g. out.csv): ")
+
+    # Add csv extension if not provided
+    if not output_file.endswith(".csv"):
+        output_file += ".csv"
+
+    # Add results directory if not provided
+    if not output_file.startswith("results/") and not output_file.startswith("/") and not output_file.startswith("."):
+        output_file = f"results/{output_file}"
 
     print(f"Sample size calculation: {num_trials} trials needed for the survey.")
 
@@ -225,10 +244,23 @@ if __name__ == "__main__":
 
         question_id = 1
 
-        session = LLMSession(pre_prompt, llm_config)
+        if is_causal_inference:
+            # Choose randomly one row from causal inference data
+            row = causal_inference_data.sample(n=1, random_state=trial_id)
+
+            # Inject causal inference data into the pre-prompt
+            # In the prompt, we use the column names as placeholders
+            pre_prompt = pre_prompt_template.format(
+                **row.to_dict(orient="records")[0]
+            )
+
+        if dry_run:
+            session = DebugSession(pre_prompt)
+        else:
+            session = LLMSession(pre_prompt, llm_config)
 
         # Run the survey for each scenario
-        for scenario_text in scenario_texts:
+        for scenario, scenario_text in zip(selected_scenario, scenario_texts):
             session.add_user_message("Now we switch to the following scenario: " + scenario_text)
 
             # Query the LLM for each survey question
@@ -236,10 +268,7 @@ if __name__ == "__main__":
                 for question in survey_questions[category]:
 
                     # If no API key provided, skip API call
-                    if dry_run:
-                        llm_response = "[DRY RUN]"
-                    else:
-                        llm_response = session.query(question)
+                    llm_response = session.query(question)
 
                     # Question id as a 3 digit number with the question
                     question_column = f"{question_id:03d} {question}"
@@ -248,7 +277,7 @@ if __name__ == "__main__":
                     # Store the survey response in the DataFrame
                     rows.append({
                         "TrialId": trial_id,
-                        "Scenario": selected_scenario,
+                        "Scenario": scenario,
                         "Category": category,
                         "Question": question_column,
                         "Response": llm_response

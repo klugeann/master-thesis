@@ -2,3 +2,4 @@
 venv
 # Ignore Mac files
 .DS_Store
+results/*.csv
