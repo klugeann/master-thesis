@@ -3,3 +3,4 @@ venv
 # Ignore Mac files
 .DS_Store
 results/*.csv
+**/.ipynb_checkpoints
