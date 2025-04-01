@@ -1,4 +1,4 @@
-#!python3
+#!python3survey3
 
 import openai
 import random
@@ -107,7 +107,7 @@ class LLMSession:
         reply = completion.choices[0].message.content
 
         # Keep track of the conversation state
-        self.messages.append({"role": "assistent", "content": reply})
+        self.messages.append({"role": "assistant", "content": reply})
 
         return reply
     
@@ -242,8 +242,6 @@ if __name__ == "__main__":
 
         print(f"{trial_id + 1}/{num_trials} Running LLM survey for: {selected_scenario}")
 
-        question_id = 1
-
         if is_causal_inference:
             # Choose randomly one row from causal inference data
             row = causal_inference_data.sample(n=1, random_state=trial_id)
@@ -261,13 +259,13 @@ if __name__ == "__main__":
 
         # Run the survey for each scenario
         for scenario, scenario_text in zip(selected_scenario, scenario_texts):
+            question_id = 1
             session.add_user_message("Now we switch to the following scenario: " + scenario_text)
 
             # Query the LLM for each survey question
             for category in survey_question_categories:
                 for question in survey_questions[category]:
 
-                    # If no API key provided, skip API call
                     llm_response = session.query(question)
 
                     # Question id as a 3 digit number with the question
