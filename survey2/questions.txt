@@ -26,3 +26,13 @@
 15 Manipulation Check Price Direction: What is the price you paid for your new smartphone? Choose one of the answers below. a)$80 b)$100 c)$120
 17 Realism Check: The scenario presented is easy to understand. (1 = Strongly Disagree, 7 = Strongly Agree)
 17 Realism Check: The scenario presented seems realistic to me, regardless of the prices stated. (1 = Strongly Disagree, 7 = Strongly Agree)
+18 Perceived Information Sensitivity: How sensitive would you consider the "Device used" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
+18 Perceived Information Sensitivity: How sensitive would you consider the "Geograhical Location" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
+18 Perceived Information Sensitivity: How sensitive would you consider the "Past browsing behavior" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
+18 Perceived Information Sensitivity: How sensitive would you consider the "Past shopping behavior" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
+18 Perceived Information Sensitivity: How sensitive would you consider the "Social Media Data" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
+19 Willingness to Reveal Information: How willing would you be to provide your "Device used" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
+19 Willingness to Reveal Information: How willing would you be to provide your "Geograhical Location" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
+19 Willingness to Reveal Information: How willing would you be to provide your "Past browsing behavior" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
+19 Willingness to Reveal Information: How willing would you be to provide your "Past shopping behavior" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
+19 Willingness to Reveal Information: How willing would you be to provide your "Social Media Data" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)

@@ -3,7 +3,7 @@ You are a consumer of any age above 18. Your age can be any whole number between
 You can be either deployed (part or full-time), unemployed, self-employed, student, retired, homemaker or other.
 You can have any school or college degree like school, Bachelor’s or Master’s, or a Professional degree or even Doctorate or no degree
 You have decided to buy a new smartphone. 
-In the course of an extensive online research, you have informed yourself and decided to buy the a specific model in online shop.
+In the course of an extensive online research, you have informed yourself and decided to buy the specific model in online shop.
 You know the online shop from previous purchases.
 You have bought a black Smartphone for the price of $100.
 You will be given a scenario about online shopping and will then answer a series of survey questions.
