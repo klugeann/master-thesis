@@ -256,10 +256,14 @@ if __name__ == "__main__":
             session = DebugSession(pre_prompt)
         else:
             session = LLMSession(pre_prompt, llm_config)
+        
+        scenario_id = 0
 
         # Run the survey for each scenario
         for scenario, scenario_text in zip(selected_scenario, scenario_texts):
             question_id = 1
+            scenario_id += 1
+
             session.add_user_message("Now we switch to the following scenario: " + scenario_text)
 
             # Query the LLM for each survey question
@@ -274,7 +278,7 @@ if __name__ == "__main__":
 
                     # Store the survey response in the DataFrame
                     rows.append({
-                        "TrialId": trial_id,
+                        "TrialId": (f"{trial_id}-{scenario_id:02d}" if within_subject else f"{trial_id}"),
                         "Scenario": scenario,
                         "Category": category,
                         "Question": question_column,
