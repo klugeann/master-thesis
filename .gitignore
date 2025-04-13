@@ -4,3 +4,4 @@ venv
 .DS_Store
 results/*.csv
 **/.ipynb_checkpoints
+.virtual_documents

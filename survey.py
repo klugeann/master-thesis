@@ -100,7 +100,8 @@ class LLMSession:
         # Query the api
         completion = self.client.chat.completions.create(
             model=self.config.get("model"),
-            messages=self.messages
+            messages=self.messages,
+            timeout=60
         )
 
         # Query the api
@@ -157,19 +158,19 @@ def find_sample_size(effect_size, alpha, power, num_groups):
 if __name__ == "__main__":
     # Random seed for reproducibility
     random.seed(42)
-
-    # Query directory from user
-    directory = input("Enter the directory containing the survey files: ")
+    # Query directory from user or use environment variable
+    directory = os.getenv("SURVEY_DIRECTORY") or input("Enter the directory containing the survey files: ")
 
     # Query whether to use causal inference or not
-    is_causal_inference = input("Do you want to use causal inference? (y/N): ").lower() == "y"
+    is_causal_inference_env = os.getenv("USE_CAUSAL_INFERENCE", "")
+    is_causal_inference = is_causal_inference_env.lower() == "y" if is_causal_inference_env else input("Do you want to use causal inference? (y/N): ").lower() == "y"
 
     # Read general instruction pre-prompt for LLM
     if is_causal_inference:
         pre_prompt_template = read_text_from_file(f"{directory}/prompt_causal_inference.txt")
 
         # Load causal inference data
-        causal_inference_data = pd.read_csv("causal_inference_consumer_data.csv")
+        causal_inference_data = pd.read_csv(os.getenv("CAUSAL_INFERENCE_DATA", "causal_inference_consumer_data.csv"))
     else:
         pre_prompt = read_text_from_file(f"{directory}/prompt.txt")
 
@@ -181,38 +182,40 @@ if __name__ == "__main__":
     survey_question_categories = sorted(list(survey_questions.keys()))
 
     # Query if dry running
-    dry_run = input("Do you want to do a dry run? (y,N): ").lower() == "y"
+    dry_run_env = os.getenv("DRY_RUN", "")
+    dry_run = dry_run_env.lower() == "y" if dry_run_env else input("Do you want to do a dry run? (y,N): ").lower() == "y"
 
-    # Query OpenAI API config from user
+    # Query OpenAI API config from user or use environment variables
     llm_config = {}
 
     if dry_run:
         print("Running in dry run mode. No API key provided")
     else:
-        api_key = input("Enter your OpenAI API key (or empty): ")
+        api_key = os.getenv("OPENAI_API_KEY") or input("Enter your OpenAI API key (or empty): ")
 
         if api_key:
             llm_config["api_key"] = api_key
 
-        base_url = input("Enter your OpenAI base URL (or empty): ")
+        base_url = os.getenv("OPENAI_BASE_URL") or input("Enter your OpenAI base URL (or empty): ")
     
         if base_url:
             llm_config["base_url"] = base_url
         
-        model = input("Enter your model: ")
+        model = os.getenv("OPENAI_MODEL") or input("Enter your model: ")
 
         if model:
             llm_config["model"] = model
         
 
-    # Query the number of trials from the user
-    num_trials = int(input("Enter the number of trials: "))
+    # Query the number of trials from the user or use environment variable
+    num_trials = int(os.getenv("NUM_TRIALS") or input("Enter the number of trials: "))
                      
     # Ask if the user wants to do a "within-subject" or "between-subject" survey
-    within_subject = input("Do you want to do a within-subject survey? (y/N): ").lower() == "y"
+    within_subject_env = os.getenv("WITHIN_SUBJECT", "")
+    within_subject = within_subject_env.lower() == "y" if within_subject_env else input("Do you want to do a within-subject survey? (y/N): ").lower() == "y"
 
-    # Query output file name from user
-    output_file = input("Enter the name of the output csv file (e.g. out.csv): ")
+    # Query output file name from user or use environment variable
+    output_file = os.getenv("OUTPUT_FILE") or input("Enter the name of the output csv file (e.g. out.csv): ")
 
     # Add csv extension if not provided
     if not output_file.endswith(".csv"):
