@@ -3,6 +3,20 @@
 00 Demographics: Education. Please choose one. a)Some school but no degree  b)High school graduate  c)Some college but no degree  d)Bachelor’s degree e)Master’s degree f)Professional degree  g)Doctorate  h)Other
 00 Demographics: Employment status. Please choose one. a)Employed full-time  b)Employed part-time  c)Self-employed  d)Homemaker  e)Student  f)Retired  g)Unemployed  h)Other
 00 Demographics: Annual gross household income. Please choose one. a)Less than $20,000  b)$20,000 to $34,999  c)$35,000 to $49,999  d)$50,000 to $74,999  e)$75,000 to $99,999  f)$100,000 or more
+11 Daily Internet Usage: What is your average daily Internet usage in hours? Choose one of the answers below. a)Less than an hour b)1–2 h c)2–4 h d)4–6 h e)More than 6 h
+12 Frequency of Online Purchases: How many times did you purchase products online in the last 12 months? Choose one of the answers below. a)Never b)Once or twice c)3–6 times d)Monthly e)Bi-Weekly (only in Study 2) f)Weekly
+13 Money Spent for Online Purchases: What amount did you spend online in the last 12 months? Choose one of the answers below. a)0$ b)1–50$ c)51–100$ d)101–200$ e)201–500$ f)501–1,000$ g)Over 1,000$
+14 Social Media Usage: Which social networks do you use on a regular basis (at least once a week)? Choose one or multiple answers below. a)Facebook b)Instagram c)Twitter d)Snapchat e)LinkedIn f)None of these
+18 Perceived Information Sensitivity: How sensitive would you consider the "Device used" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
+18 Perceived Information Sensitivity: How sensitive would you consider the "Geograhical Location" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
+18 Perceived Information Sensitivity: How sensitive would you consider the "Past browsing behavior" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
+18 Perceived Information Sensitivity: How sensitive would you consider the "Past shopping behavior" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
+18 Perceived Information Sensitivity: How sensitive would you consider the "Social Media Data" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
+19 Willingness to Reveal Information: How willing would you be to provide your "Device used" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
+19 Willingness to Reveal Information: How willing would you be to provide your "Geograhical Location" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
+19 Willingness to Reveal Information: How willing would you be to provide your "Past browsing behavior" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
+19 Willingness to Reveal Information: How willing would you be to provide your "Past shopping behavior" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
+19 Willingness to Reveal Information: How willing would you be to provide your "Social Media Data" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
 01 Distributive Price Fairness Perception: The price I paid was… (1 = Extremely Unfair, 7 = Extremely Fair)
 01 Distributive Price Fairness Perception: The price I paid was… (1 = Extremely Unacceptable, 7 = Extremely Acceptable)
 01 Distributive Price Fairness Perception: The price I paid was… (1 = Extremely Unreasonable, 7 = Extremely Reasonable)
@@ -19,20 +33,6 @@
 08 Product Involvement: To me buying a new smartphone is… (1 = Unappealing, 7 = Appealing)
 08 Product Involvement: To me buying a new smartphone is… (1 = Mundane, 7 = Fascinating)
 08 Product Involvement: To me buying a new smartphone is… (1 = Worthless, 7 = Valuable)
-11 Daily Internet Usage: What is your average daily Internet usage in hours? Choose one of the answers below. a)Less than an hour b)1–2 h c)2–4 h d)4–6 h e)More than 6 h
-12 Frequency of Online Purchases: How many times did you purchase products online in the last 12 months? Choose one of the answers below. a)Never b)Once or twice c)3–6 times d)Monthly e)Bi-Weekly (only in Study 2) f)Weekly
-13 Money Spent for Online Purchases: What amount did you spend online in the last 12 months? Choose one of the answers below. a)0$ b)1–50$ c)51–100$ d)101–200$ e)201–500$ f)501–1,000$ g)Over 1,000$
-14 Social Media Usage: Which social networks do you use on a regular basis (at least once a week)? Choose one or multiple answers below. a)Facebook b)Instagram c)Twitter d)Snapchat e)LinkedIn f)None of these
 15 Manipulation Check Price Direction: What is the price you paid for your new smartphone? Choose one of the answers below. a)$80 b)$100 c)$120
 17 Realism Check: The scenario presented is easy to understand. (1 = Strongly Disagree, 7 = Strongly Agree)
 17 Realism Check: The scenario presented seems realistic to me, regardless of the prices stated. (1 = Strongly Disagree, 7 = Strongly Agree)
-18 Perceived Information Sensitivity: How sensitive would you consider the "Device used" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
-18 Perceived Information Sensitivity: How sensitive would you consider the "Geograhical Location" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
-18 Perceived Information Sensitivity: How sensitive would you consider the "Past browsing behavior" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
-18 Perceived Information Sensitivity: How sensitive would you consider the "Past shopping behavior" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
-18 Perceived Information Sensitivity: How sensitive would you consider the "Social Media Data" as an information source for personalized price discrimination? (1 = Not sensitive, 7 = Very sensitive)
-19 Willingness to Reveal Information: How willing would you be to provide your "Device used" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
-19 Willingness to Reveal Information: How willing would you be to provide your "Geograhical Location" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
-19 Willingness to Reveal Information: How willing would you be to provide your "Past browsing behavior" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
-19 Willingness to Reveal Information: How willing would you be to provide your "Past shopping behavior" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
-19 Willingness to Reveal Information: How willing would you be to provide your "Social Media Data" as information to the marketer? (1 = Not willing to provide, 7 = Very willing to provide)
