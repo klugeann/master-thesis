@@ -267,8 +267,17 @@ if __name__ == "__main__":
             question_id = 1
             scenario_id += 1
 
-            session.add_user_message("Now we switch to the following scenario: " + scenario_text)
+            scenario_prompt = "Please answer the following questions based on the following new scenario: \n\n"    
 
+            new_scenario_prompt = "Now we switch to another scenario." + \
+                "You are still the same person as before with same identity, age, employment status, education and so on," + \
+                f"but you are now in a different situation. {scenario_prompt}\n\n"
+
+            if within_subject and scenario_id > 1:
+                session.add_user_message(new_scenario_prompt + scenario_text)
+            else:
+                session.add_user_message(scenario_prompt + scenario_text)
+            
             # Query the LLM for each survey question
             for category in survey_question_categories:
                 for question in survey_questions[category]:
