@@ -9,6 +9,13 @@ import math
 from statsmodels.stats.power import TTestIndPower
 
 
+skippable_categories = ["00 Demographics", 
+                        "11 Daily Internet Usage", 
+                        "12 Frequency of Online Purchases",
+                        "13 Money Spent for Online Purchases",
+                        "14 Social Media Usage"]
+
+
 def read_lines_from_text_file(file_name):
     """
     Read lines from a text file and return a list of non-empty lines.
@@ -40,6 +47,25 @@ def read_text_from_file(file_name):
     lines = read_lines_from_text_file(file_name)
     return " ".join(lines)
 
+def read_pairs_from_file(file_name):
+    """
+    Reads pairs of key-value from a text file.
+
+    Args:
+        file_name (str): The name of the text file.
+    
+    Returns:
+        list: A list of pairs read from the file.
+    """
+    def make_pair(line):
+        pair = [el.strip() for el in line.split(":", 2)]
+        return ["", line] if len(pair) < 2 else pair
+
+    lines = read_lines_from_text_file(file_name)
+    list_of_pairs = [make_pair(line) for line in lines]
+
+    return list_of_pairs
+
 
 def read_dictionary_from_file(file_name):
     """
@@ -58,12 +84,7 @@ def read_dictionary_from_file(file_name):
         key2:value2
         ...
     """
-    def make_pair(line):
-        pair = [el.strip() for el in line.split(":", 2)]
-        return ["", line] if len(pair) < 2 else pair
-
-    lines = read_lines_from_text_file(file_name)
-    list_of_pairs = [make_pair(line) for line in lines]
+    list_of_pairs = read_pairs_from_file(file_name)
 
     # Combine list of pairs into a dictionry of keys and multiple values
     dictionary = {}
@@ -73,6 +94,19 @@ def read_dictionary_from_file(file_name):
         else:
             dictionary[key].append(value)
     return dictionary
+
+
+def deduplicate_list(input_list):
+    """
+    Remove duplicates from a list while preserving the order of elements.
+
+    Args:
+        input_list (list): The list from which to remove duplicates.
+
+    Returns:
+        list: A new list with duplicates removed.
+    """
+    return list(dict.fromkeys(input_list))
 
 
 # A LLM session keeping track of the state of the conversation
@@ -178,8 +212,8 @@ if __name__ == "__main__":
     scenarios = read_dictionary_from_file(f"{directory}/scenarios.txt")
 
     # Read survey questions (formatted for LLM)
-    survey_questions = read_dictionary_from_file(f"{directory}/questions.txt")
-    survey_question_categories = sorted(list(survey_questions.keys()))
+    survey_questions = read_pairs_from_file(f"{directory}/questions.txt")
+    survey_question_categories = deduplicate_list(map(lambda x: x[0], survey_questions))
 
     # Query if dry running
     dry_run_env = os.getenv("DRY_RUN", "")
@@ -280,11 +314,11 @@ if __name__ == "__main__":
             
             # Query the LLM for each survey question
             for category in survey_question_categories:
-                if within_subject and scenario_id > 1 and category == "00 Demographics":
+                if within_subject and scenario_id > 1 and category in skippable_categories:
                     # Skip demographics questions for within-subject design
                     continue
 
-                for question in survey_questions[category]:
+                for question in map(lambda x: x[1], filter(lambda x: x[0] == category, survey_questions)):
                     llm_response = session.query(question)
 
                     # Question id as a 3 digit number with the question
