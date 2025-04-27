@@ -280,8 +280,11 @@ if __name__ == "__main__":
             
             # Query the LLM for each survey question
             for category in survey_question_categories:
-                for question in survey_questions[category]:
+                if within_subject and scenario_id > 1 and category == "00 Demographics":
+                    # Skip demographics questions for within-subject design
+                    continue
 
+                for question in survey_questions[category]:
                     llm_response = session.query(question)
 
                     # Question id as a 3 digit number with the question
