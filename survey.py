@@ -340,7 +340,16 @@ if __name__ == "__main__":
     # Put questions as columns
     df = df.pivot_table(index=["TrialId", "Scenario"], columns=["Question", "Category"], values="Response", aggfunc="first").reset_index()
 
+    # Check if file exists and add suffix if it does
+    if os.path.exists(output_file):
+        base_name, ext = os.path.splitext(output_file)
+        i = 1
+        while os.path.exists(output_file):
+            output_file = f"{base_name}_{i}{ext}"
+            i += 1
+
     # Save the survey responses to a CSV file with columns as trials and rows as questions
-    df.to_csv(output_file, index=False)
+    if not dry_run:
+        df.to_csv(output_file, index=False)
 
     print(f"LLM survey responses saved to '{output_file}'.")
