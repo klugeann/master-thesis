@@ -314,16 +314,17 @@ if __name__ == "__main__":
             
             # Query the LLM for each survey question
             for category in survey_question_categories:
-                if within_subject and scenario_id > 1 and category in skippable_categories:
-                    # Skip demographics questions for within-subject design
-                    continue
 
                 for question in map(lambda x: x[1], filter(lambda x: x[0] == category, survey_questions)):
-                    llm_response = session.query(question)
-
                     # Question id as a 3 digit number with the question
                     question_column = f"{question_id:03d} {question}"
                     question_id += 1
+
+                    if within_subject and scenario_id > 1 and category in skippable_categories:
+                        # Skip demographics questions for within-subject design
+                        continue
+
+                    llm_response = session.query(question)
 
                     # Store the survey response in the DataFrame
                     rows.append({
