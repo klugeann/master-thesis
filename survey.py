@@ -2,7 +2,7 @@
 
 import openai
 import random
-import json
+import time
 import os
 import pandas as pd
 import math
@@ -334,6 +334,9 @@ if __name__ == "__main__":
                         "Question": question_column,
                         "Response": llm_response
                     })
+
+                    if not dry_run:
+                        time.sleep(0.2)
 
     # Convert the list of rows to a DataFrame
     df = pd.DataFrame(rows, columns=["TrialId", "Scenario", "Category", "Question", "Response"])

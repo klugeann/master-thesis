@@ -2,6 +2,8 @@
 venv
 # Ignore Mac files
 .DS_Store
-results/*.csv
+results/dry_run
+results/pilot
 **/.ipynb_checkpoints
 .virtual_documents
+survey.env
