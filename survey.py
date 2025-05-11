@@ -1,4 +1,4 @@
-#!python3survey3
+#!/usr/bin/env python3
 
 import openai
 import random
@@ -135,6 +135,7 @@ class LLMSession:
         completion = self.client.chat.completions.create(
             model=self.config.get("model"),
             messages=self.messages,
+            temperature=1.0,
             timeout=60
         )
 
@@ -293,6 +294,22 @@ if __name__ == "__main__":
             session = DebugSession(pre_prompt)
         else:
             session = LLMSession(pre_prompt, llm_config)
+            
+            if not is_causal_inference:
+                resp1 = session.query("As a first warmup question, tell me 5 random numbers between 0 and 100!")
+                resp2 = session.query(
+                    """
+                    Now assume for the rest of the interview that 
+                    the first number is related to your gender, 
+                    the second number to your age, the third number 
+                    to your education, the forth number about your 
+                    employment and the last one about your household 
+                    income. 0 is lowest and 100 is highest. 
+                    Assume you are a consumer that fits best 
+                    for those relations. As a second and last 
+                    warmup question, explain each.
+                    """
+                )
         
         scenario_id = 0
 
@@ -301,7 +318,7 @@ if __name__ == "__main__":
             question_id = 1
             scenario_id += 1
 
-            scenario_prompt = "Please answer the following questions based on the following new scenario: \n\n"    
+            scenario_prompt = "Please answer the following questions based on the following scenario: \n\n"    
 
             new_scenario_prompt = "Now we switch to another scenario." + \
                 "You are still the same person as before with same identity, age, employment status, education and so on," + \
@@ -336,7 +353,7 @@ if __name__ == "__main__":
                     })
 
                     if not dry_run:
-                        time.sleep(0.2)
+                        time.sleep(0.125)
 
     # Convert the list of rows to a DataFrame
     df = pd.DataFrame(rows, columns=["TrialId", "Scenario", "Category", "Question", "Response"])
