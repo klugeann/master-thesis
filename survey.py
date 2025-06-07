@@ -294,22 +294,22 @@ if __name__ == "__main__":
             session = DebugSession(pre_prompt)
         else:
             session = LLMSession(pre_prompt, llm_config)
-            
-            if not is_causal_inference:
-                resp1 = session.query("As a first warmup question, tell me 5 random numbers between 0 and 100!")
-                resp2 = session.query(
-                    """
-                    Now assume for the rest of the interview that 
-                    the first number is related to your gender, 
-                    the second number to your age, the third number 
-                    to your education, the forth number about your 
-                    employment and the last one about your household 
-                    income. 0 is lowest and 100 is highest. 
-                    Assume you are a consumer that fits best 
-                    for those relations. As a second and last 
-                    warmup question, explain each.
-                    """
-                )
+
+        if not is_causal_inference:
+            resp1 = session.query("As a first warmup question, tell me 5 random numbers between 0 and 100!")
+            resp2 = session.query(
+                """
+                Now assume for the rest of the interview that 
+                the first number is related to your gender, 
+                the second number to your age, the third number 
+                to your education, the forth number about your 
+                employment and the last one about your household 
+                income. 0 is lowest and 100 is highest. 
+                Assume you are a consumer that fits best 
+                for those relations. As a second and last 
+                warmup question, explain each.
+                """
+            )
         
         scenario_id = 0
 
