@@ -7,3 +7,4 @@ results/pilot
 **/.ipynb_checkpoints
 .virtual_documents
 survey.env
+analysis/*.xlsx
